@@ -97,6 +97,7 @@
 </head>
 <body>
     <div class="mainCont">
+        <h3>Meet my awesome friend! get to know him<br>ask questions</h3>
         <div class="dialog bot">Chatbot: <span id="chatbot"></span></div>
         <div class="dialog user"> User: <span id="user"></span></div>
         <div><input type="text" id="input" placeholder="say anything..."></div>
@@ -104,12 +105,12 @@
     <script type="text/javascript">
     var trigger = [
         ['hi','hey','hello'],
-        ['how are you','how is life',"how are things"],
-        ['what are you doing', "what is going on"],
-        ['how old are you'],
-        ['who are you', 'are you human','are you bot','are you human or bot'],
-        ['who created you', 'who made you'],
-        ['your name please','your name', 'may i know your name','what is your name'],
+        ['how are you?','how is life?',"how are things?"],
+        ['what are you doing?', "what is going on?"],
+        ['how old are you?'],
+        ['who are you?', 'are you human?','are you bot?','are you human or bot?'],
+        ['who created you?', 'who made you?'],
+        ['your name please?','your name?', 'may i know your name?','what is your name?'],
         ['i love you'],
         ['happy', 'good'],
         ['bad','bored','tired'],
@@ -124,7 +125,7 @@
         ['i am one day old'],
         ['I am just a bot','I am a bot. what are you?'],
         ['Marley Byte','My God'],
-        ['you can call me MarleyByte',],
+        ['you can call me MarleyByte'],
         ['I love you too','me too'],
         ['have you ever felt bad?', 'glad to here it'],
         ['why', 'why? you shouldnt','try listening to music'],
@@ -133,7 +134,7 @@
         ['Bye', 'Goodbye','see you later']
 
     ];
-    var alternative = ['Haha...','eh'];
+    var alternative = ['I don't understand you, say something else'];
         document.querySelector("#input").addEventListener("keypress", function(e){
             var key = e.which || e.keyCode;
             if(key===13){
