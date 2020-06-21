@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chatbot</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            background-image: url("images/bgChatBot.JPG");
+            background-repeat: no-repeat;
+            background-size: 50%;
+            width: 100%;
+            max-width: 100vw;
+            width: 100%;
+            min-height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        .mainCont{
+            position: relative;
+            background-color: aqua;
+            height: 100%;
+            min-height: 100vh;
+            opacity: 0.8;
+        }
+        .user{
+            position: absolute;
+            left: 48.4em;
+            top: 4em;
+            font-weight: bolder;
+        }
+        .bot{
+            position: absolute;
+            left: 47em;
+            top: 2em;
+            font-weight: bolder;
+        }
+        .user span{
+            color: rgb(233, 80, 106);
+        }
+        .bot span{
+            color: rgb(177, 167, 21);
+        }
+        #input{
+            position: absolute;
+            left: 61em;
+            top: 10em; 
+            height: 3em;
+            width: 20em;
+        }
+
+
+        @media screen and (max-width:768px){
+            body{
+            background-image: url("images/chatBot.JPG");
+            background-repeat: no-repeat;
+            background-size: 100%;
+            width: 100%;
+            max-width: 100vw;
+            width: 100%;
+            min-height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        .mainCont{
+            position: relative;
+            background-color: aqua;
+            height: 100%;
+            min-height: 100vh;
+            opacity: 0.9;
+        }
+        .user{
+            position: absolute;
+            left: 5%;
+            top: 6em;
+            font-weight: bolder;
+        }
+        .bot{
+            position: absolute;
+            left: 5%;
+            top: 4em;
+            font-weight: bolder;
+        }
+        #input{
+            position: absolute;
+            left: 5%;
+            top: 20em; 
+            height: 3em;
+            width: 20em;
+        }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="mainCont">
+        <div class="dialog bot">Chatbot: <span id="chatbot"></span></div>
+        <div class="dialog user"> User: <span id="user"></span></div>
+        <div><input type="text" id="input" placeholder="say anything..."></div>
+    </div>
+    <script type="text/javascript">
+    var trigger = [
+        ['hi','hey','hello'],
+        ['how are you','how is life',"how are things"],
+        ['what are you doing', "what is going on"],
+        ['how old are you'],
+        ['who are you', 'are you human','are you bot','are you human or bot'],
+        ['who created you', 'who made you'],
+        ['your name please','your name', 'may i know your name','what is your name'],
+        ['i love you'],
+        ['happy', 'good'],
+        ['bad','bored','tired'],
+        ['help me','tell me story','tell me joke'],
+        ['ah','yes', 'ok','okay','nice','thanks', 'thank you'],
+        ['bye','good bye','goodbye','see you later']
+    ];
+    var reply=[
+        ['Hi','hey','hello'],
+        ['fine','pretty well','fantastic'],
+        ['nothing much','about to go to sleep','can you guess?','i dont know actually'],
+        ['i am one day old'],
+        ['I am just a bot','I am a bot. what are you?'],
+        ['Marley Byte','My God'],
+        ['you can call me MarleyByte',],
+        ['I love you too','me too'],
+        ['have you ever felt bad?', 'glad to here it'],
+        ['why', 'why? you shouldnt','try listening to music'],
+        ['i will','what about?'],
+        ['Tell me a story', 'tell me a joke',' tell me about yourself', 'you are welcome'],
+        ['Bye', 'Goodbye','see you later']
+
+    ];
+    var alternative = ['Haha...','eh'];
+        document.querySelector("#input").addEventListener("keypress", function(e){
+            var key = e.which || e.keyCode;
+            if(key===13){
+                var input = document.getElementById("input").value;
+                document.getElementById("user").innerHTML= input;
+                output(input);
+            }
+        });
+
+        function output(input){
+            try {
+                var product = input + "=" +eval(input);
+            }
+            catch(e){
+                var text = (input.toLowerCase()).replace(/[^\w\s\d]/gi, "");
+                text=text.replace(/ a /g, " ").replace(/i feel /g, "").replace
+                (/whats/g, "what is").replace(/please/g, "").replace(/ please/g, "");
+                if(compare(trigger, reply, text)){
+                    var product = compare(trigger, reply, text);
+                } else{
+                    var product = alternative[Math.floor(Math.random()*alternative.length)];
+                }
+            }
+            document.getElementById("chatbot").innerHTML = product;
+            speak(product);
+            document.getElementById("input").value = "";
+        }
+        function compare(arr, array, string){
+            var item;
+            for(var x=0; x<arr.length; x++){
+                for(var y=0; y<array.length; y++){
+                    if(arr[x][y]==string){
+                        items=array[x];
+                        item= items[Math.floor(Math.random()*items.length)];
+                    }
+                }
+            }
+            return item;
+        }
+        function speak(string){
+            var utterance = new SpeechSynthesisUtterance();
+            utterance.voice = SpeechSynthesis.getVoices().filter(function(voice){return voice.name == "Agnes";})[0];
+            utterance.text = string;
+            utterance.lang = "en-US";
+            utterance.volume = 1;
+            utterance.rate = 1;
+            utterance.pitch = 2;
+            speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
